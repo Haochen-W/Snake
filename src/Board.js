@@ -22,8 +22,10 @@ class Board extends React.Component{
         running: false,
         alive: true,
         speed: 2,
-        food: {}
-      }
+        food: {},
+        currentscore: 0
+      },
+      display: '0'
     }
   }
 
@@ -39,7 +41,6 @@ class Board extends React.Component{
           ctx.lineTo(vertical, boardSize);
           ctx.stroke();
         }
-      
         for (var horizontal = cellSize; horizontal < boardSize; horizontal += cellSize){
           ctx.beginPath();
           ctx.moveTo(0, horizontal);
@@ -59,17 +60,16 @@ class Board extends React.Component{
         ctx.lineTo(vertical, boardSize);
         ctx.stroke();
       }
-    
       for (var horizontal = cellSize; horizontal < boardSize; horizontal += cellSize){
         ctx.beginPath();
         ctx.moveTo(0, horizontal);
         ctx.lineTo(boardSize ,horizontal);
         ctx.stroke();
       }
-  }
+    }
 
     drawSnake(){
-      const {ctx, snake} = this.state
+      const {ctx, snake} = this.state;
       ctx.fillStyle = '#795548';
       snake.body.forEach(cord => { // for loop through the snake's body, fill rect
         ctx.fillRect(cord.x * cellSize, cord.y * cellSize, 1 * cellSize, 1 * cellSize);
@@ -77,7 +77,7 @@ class Board extends React.Component{
     }
 
     drawBoard(){
-        const canvas = this.refs.gameBoard
+        const canvas = this.refs.gameBoard;
         this.setState({
           canvas: canvas,
           ctx: canvas.getContext('2d')
@@ -90,19 +90,28 @@ class Board extends React.Component{
     
     changeDirection (direction) {
       let newState = Object.assign({}, this.state);
-      newState.snake.direction = direction;
+      if (direction === 'up' || direction === 'w'){
+        newState.snake.direction = 'up';
+      } else if (direction === 'down' || direction === 's'){
+        newState.snake.direction = 'down';
+      } else if (direction === 'left' || direction === 'a'){
+        newState.snake.direction = 'left';
+      } else if (direction === 'right' || direction === 'd'){
+        newState.snake.direction = 'right';
+      }
       this.setState(newState);
       this.canvasMoveSnake();
     }
 
     canvasMoveSnake(){
-      const {ctx, snake} = this.state
+      const {ctx, snake} = this.state;
       ctx.fillStyle = '#9575cd';
       this.drawRect(snake.tail.x,snake.tail.y,1,1);
       ctx.fillStyle = 'yellow';
       this.drawRect(snake.head.x,snake.head.y,1,1);
       if (snake.head.x === snake.food.x && snake.head.y === snake.food.y) {
         this.addBody();
+        this.addscore();
         this.drawFood();
       }
       if (snake.alive === false && snake.running === false){
@@ -120,6 +129,13 @@ class Board extends React.Component{
         this.drawBoard();
     } //as soon as the object is created, draw the board
 
+    addscore() {
+      let newState = Object.assign({}, this.state);
+      newState.snake.currentscore = newState.snake.currentscore + 1;
+      newState.display = newState.snake.currentscore;
+      this.setState(newState);
+    }
+
     drawFood () {
       const {ctx, snake} = this.state;
       ctx.fillStyle = 'red';
@@ -127,7 +143,7 @@ class Board extends React.Component{
         x: Math.floor(Math.random() * 30),
         y: Math.floor(Math.random() * 30)
       }
-      while (this.exists(position)) {
+      while(this.exists(position)){
         position.x = Math.floor(Math.random() * 30);
         position.y = Math.floor(Math.random() * 30);
       }
@@ -137,19 +153,23 @@ class Board extends React.Component{
       })
       this.drawRect(position.x, position.y,1,1);
     }
-    exists(point) {
+    // if the position is on the snake's body, return true, otherwise false.
+    exists(position) {
       const {snake} = this.state;
-    
-      for (var cord in snake.body) {
-        if (point.x === cord.x && point.y === cord.y) {
-          return true
+      for (var i = 0; i < snake.currentscore; i++){
+        var cord = {
+          x: snake.body[i].x,
+          y: snake.body[i].y
+        }
+        if (position.x === cord.x && position.y === cord.y){
+          return true;
         }
       }
-      return false
+      return false;
     }
-
+    
     addBody() {
-      const {snake} = this.state
+      const {snake} = this.state;
       var newTail = {}
       switch(snake.direction){
         case 'up':
@@ -168,11 +188,11 @@ class Board extends React.Component{
           break;
       }
       snake.body.push(newTail)
-      snake.tail = newTail
+      snake.tail = newTail;
     }
 
     endGame() {
-      const {ctx} = this.state
+      const {ctx} = this.state;
     
       let newState = Object.assign({}, this.state);
       newState.snake.running = false;
@@ -240,8 +260,10 @@ class Board extends React.Component{
             running: false,
             alive: true,
             speed: 2,
-            food: {}
-          }
+            food: {},
+            currentscore: 0
+          },
+          display: '0'
       }))
       this.drawBoard();
     }
@@ -266,9 +288,10 @@ class Board extends React.Component{
     render() {
         return (
             <div id='gameContainer' className='container-fluid'>
+              {this.state.display}
                 <canvas id='gameBoard' ref="gameBoard" width={boardSize} height={boardSize} />
                   <KeyboardEventHandler
-                    handleKeys={['r', 'esc', '[', ']']}
+                    handleKeys={['r', 'esc', '[', ']', 'space']}
                     onKeyEvent={(key, e) => {
                       if(key === 'r'){
                         this.resetBoard();
@@ -278,12 +301,13 @@ class Board extends React.Component{
                         this.speedDown();
                       } else if (key === ']'){
                         this.speedUp();
+                      } else if (key === 'space') {
+                        alert("Paused! Click the button below to continue :)");
                       }
                     }}/>
                     <Snake snake={this.state.snake}
                     changeDirection={this.changeDirection.bind(this)}
                     endGame={this.endGame.bind(this)}
-                    //drawGrid2={this.drawGrid2.bind(this)}
                     drawFood={this.drawFood.bind(this)}
                   />
             </div>

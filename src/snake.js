@@ -18,8 +18,8 @@ class Snake extends React.Component{
                 case 'down':
                   snake.head.y += 1;
                   break;
-                    case 'left':
-                snake.head.x -= 1;
+                case 'left':
+                  snake.head.x -= 1;
                   break;
                 case 'right':
                   snake.head.x += 1;
@@ -28,18 +28,18 @@ class Snake extends React.Component{
                 break;
             }
             if(this.props.snake.running === false){
-                clearInterval(running)
+                clearInterval(running);
             }
             if (snake.head.x > 29 || snake.head.y > 29 || snake.head.x < 0 || snake.head.y < 0 || this.selfCollide()) {
-              snake.running = false
-              snake.alive = false
+              snake.running = false;
+              snake.alive = false;
               clearInterval(running);
             }
             var newCell = {
               x: snake.head.x,
               y: snake.head.y
             }
-            snake.body.push(newCell)
+            snake.body.push(newCell);
             snake.tail.x = snake.body[0].x;
             snake.tail.y = snake.body[0].y;
             snake.body.splice(0,1);
@@ -51,24 +51,24 @@ class Snake extends React.Component{
        return(
            <div id="Snake">
             <KeyboardEventHandler
-                  handleKeys={['left', 'up', 'right', 'down', 'space']}
+                  handleKeys={['left', 'up', 'right', 'down', 'w', 's', 'a', 'd']}
                   onKeyEvent={(key, e) => {
-                    if (key === 'up' && (this.props.snake.direction === 'down' || this.props.snake.direction === 'up')) {
-                      return
+                    if ((key === 'up' || key === 'w') && (this.props.snake.direction === 'down' || this.props.snake.direction === 'up')) {
+                      return;
                     }
-                    if (key === 'down' && (this.props.snake.direction === 'down' || this.props.snake.direction === 'up')) {
-                      return
+                    if ((key === 'down' || key === 's') && (this.props.snake.direction === 'down' || this.props.snake.direction === 'up')) {
+                      return;
                     }
-                    if (key === 'left' && (this.props.snake.direction === 'left' || this.props.snake.direction === 'right')) {
-                      return
+                    if ((key === 'left' || key === 'a') && (this.props.snake.direction === 'left' || this.props.snake.direction === 'right')) {
+                      return;
                     }
-                    if (key === 'right' && (this.props.snake.direction === 'left' || this.props.snake.direction === 'right')) {
-                      return
+                    if ((key === 'right' || key === 'd') && (this.props.snake.direction === 'left' || this.props.snake.direction === 'right')) {
+                      return;
                     }
                     if (this.props.snake.alive === false && this.props.snake.running === false){
                         this.props.endGame();
                     }
-                    if (!this.props.snake.running && this.props.snake.alive ){
+                    if (!this.props.snake.running && this.props.snake.alive){
                         this.run();
                     }
                     this.props.changeDirection(key);
