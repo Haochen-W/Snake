@@ -31,9 +31,15 @@ class Snake extends React.Component{
                 clearInterval(running);
             }
             if (snake.head.x > 29 || snake.head.y > 29 || snake.head.x < 0 || snake.head.y < 0 || this.selfCollide()) {
-              snake.running = false;
-              snake.alive = false;
-              clearInterval(running);
+              snake.lives -= 1;
+              if (snake.lives <= 0) {
+                snake.running = false;
+                snake.alive = false;
+                clearInterval(running);
+              } else {
+                alert("Revived. You have " + snake.lives + " lives remaining :)");
+                this.props.revive();
+              }
             }
             var newCell = {
               x: snake.head.x,
