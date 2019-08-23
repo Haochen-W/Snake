@@ -7,20 +7,15 @@ This is a simple snake game.
 * Use \"r\" to restart the game.
 * Use space to pause the game. 
 * You have 1 life to start, and may earn more lives if you catch the pink food. Let's GO!
-
 * The instruction is also available at the game page.
 
 ## Play the Game
-<<<<<<< HEAD
 Check out the game [here](https://snake-0711.firebaseapp.com)
 
 ## License
 
-This project is licensed under the GPL License - see the [LICENSE.md](LICENSE.md) file for details
-=======
-Check out the game [here](https://snake-0711.firebaseapp.com).
-
-## License
-
 This project is licensed under the GPL License - see the [LICENSE.md](LICENSE.md) file for details.
->>>>>>> 9cf382ec1e4fc34cb104afee823376111222a763
+
+## Acknowledgment
+
+With special thanks to the [Coffee N Code Club](https://github.com/UWCoffeeNCode) at the University of Waterloo.
