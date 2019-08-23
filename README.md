@@ -10,7 +10,7 @@ This is a simple snake game.
 * The instruction is also available at the game page.
 
 ## Play the Game
-Check out the game [here](https://snake-0711.firebaseapp.com)
+Check out the game [here](https://snake-0711.firebaseapp.com).
 
 ## License
 
