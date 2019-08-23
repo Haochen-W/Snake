@@ -1,6 +1,9 @@
 import React from 'react';
 import Snake from './snake';
+import Panel from './Panel';
+import './Panel.css';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { isAbsolute } from 'path';
 const boardSize = 720;
 const cellSize = boardSize / 30;
 
@@ -26,9 +29,9 @@ class Board extends React.Component{
         livefood: {},
         livefoodeaten: true,
         currentscore: 0,
-        lives: 3
+        record: 0,
+        lives: 1
       },
-      display: '0'
     }
   }
 
@@ -280,6 +283,8 @@ class Board extends React.Component{
     }
 
     resetBoard(){
+      const {snake} = this.state;
+      const temp = snake.currentscore > snake.record? snake.currentscore:snake.record;
       this.setState(({
           snake: {
             head: {
@@ -299,9 +304,9 @@ class Board extends React.Component{
             livefood: {},
             livefoodeaten: true,
             currentscore: 0,
-            lives: 3
+            record: temp,
+            lives: 1
           },
-          display: '0'
       }))
       this.drawBoard();
     }
@@ -330,14 +335,14 @@ class Board extends React.Component{
 
     speedUp(){
       let newState = Object.assign({}, this.state);
-      newState.snake.speed = this.state.snake.speed + 0.3;        
+      newState.snake.speed = this.state.snake.speed + 0.25;        
       this.setState(newState);
     }
 
     speedDown(){
       let newState = Object.assign({}, this.state);
       if (this.state.snake.speed >= 1.3) {
-        newState.snake.speed = this.state.snake.speed - 0.3;
+        newState.snake.speed = this.state.snake.speed - 0.25;
       } else {
         newState.snake.speed = this.state.snake.speed;
         alert("This is the lowest speed!")
@@ -346,10 +351,14 @@ class Board extends React.Component{
     }
 
     render() {
+      const style={
+        position: 'absolute',
+        left: '150px',
+        top: '60px'
+      }
         return (
             <div id='gameContainer' className='container-fluid'>
-              {this.state.display}
-                <canvas id='gameBoard' ref="gameBoard" width={boardSize} height={boardSize} />
+                <canvas id='gameBoard' ref="gameBoard" width={boardSize} height={boardSize} style={style}/>
                   <KeyboardEventHandler
                     handleKeys={['r', 'esc', '[', ']', 'space', 'z']}
                     onKeyEvent={(key, e) => {
@@ -372,6 +381,12 @@ class Board extends React.Component{
                     endGame={this.endGame.bind(this)}
                     drawFood={this.drawFood.bind(this)}
                     revive={this.revive.bind(this)}
+                  />
+                  <Panel  className = 'Panel'
+                  snake={this.state.snake}
+                  speedUp={this.speedUp.bind(this)}
+                  speedDown={this.speedDown.bind(this)}
+                  resetBoard={this.resetBoard.bind(this)}
                   />
             </div>
         )

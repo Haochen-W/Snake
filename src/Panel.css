@@ -1,0 +1,53 @@
+.Panel{
+    font-family: Georgia, Times, serif;
+    position: absolute;
+    left: 950px;
+    top: 10px;
+}
+
+.Panel-Title{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left;
+    color: #cee5b3;
+    text-shadow: 3px 2px grey;
+    letter-spacing: 8px;
+    text-indent: 90px;
+}
+
+.Panel-button{
+    background-color: white;
+    font-size: 16px;
+    padding: 8px 20px;
+    border-radius: 15px;
+    width: 100px;
+    margin: 10px;
+}
+
+.Panel-button:hover {
+    box-shadow: 0 12px 16px 0 grey, 0 17px 50px 0 grey;
+  }
+
+.Panel-Box{
+    width: 120%;
+    margin: 16px auto;
+    border: 2px solid #cee5b3;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.Panel-Centered{
+    text-align: center;
+    /* text-indent: 50px; */
+}
+
+.Panel-Instruction{
+    width: 120%;
+    margin: 16px auto;
+    border: 2px solid #cee5b3;
+    font-size: 16px;
+    padding: 10px;
+    text-align: left;
+    /* text-indent: 50px; */
+}
