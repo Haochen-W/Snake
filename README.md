@@ -18,4 +18,4 @@ This project is licensed under the GPL License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgment
 
-With special thanks to the [Coffee N Code Club](https://github.com/UWCoffeeNCode) at the University of Waterloo.
+With special thanks to the [Coffee N Code](https://github.com/UWCoffeeNCode) club at the University of Waterloo.
