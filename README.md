@@ -6,11 +6,9 @@ This is a simple snake game.
 * Use \"[\" and \"]\" to reduce or increase the speed of motion before the game starts.
 * Use \"r\" to restart the game.
 * Use space to pause the game. 
-<<<<<<< HEAD
-* You have 1 life to start, and may earn more lives if you catch the pink food. Let's GO!")
-=======
-* You have 1 life to start, and may earn more lives if you catch the pink food.
->>>>>>> 9cf382ec1e4fc34cb104afee823376111222a763
+* You have 1 life to start, and may earn more lives if you catch the pink food. Let's GO!
+
+* The instruction is also available at the game page.
 
 ## Play the Game
 <<<<<<< HEAD
