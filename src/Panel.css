@@ -2,17 +2,17 @@
     font-family: Georgia, Times, serif;
     position: absolute;
     left: 950px;
-    top: 10px;
+    top: 20px;
 }
 
 .Panel-Title{
     font-size: 32px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     color: #cee5b3;
     text-shadow: 3px 2px grey;
     letter-spacing: 8px;
-    text-indent: 90px;
+    text-indent: 100px;
 }
 
 .Panel-button{
@@ -39,7 +39,7 @@
 
 .Panel-Centered{
     text-align: center;
-    /* text-indent: 50px; */
+    font-size: 20px;
 }
 
 .Panel-Instruction{
@@ -49,5 +49,5 @@
     font-size: 16px;
     padding: 10px;
     text-align: left;
-    /* text-indent: 50px; */
+    text-indent: 20px;
 }

@@ -3,7 +3,7 @@ import Snake from './snake';
 import Panel from './Panel';
 import './Panel.css';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { isAbsolute } from 'path';
+//import { isAbsolute } from 'path';
 const boardSize = 720;
 const cellSize = boardSize / 30;
 
@@ -341,7 +341,7 @@ class Board extends React.Component{
 
     speedDown(){
       let newState = Object.assign({}, this.state);
-      if (this.state.snake.speed >= 1.3) {
+      if (this.state.snake.speed >= 1.25) {
         newState.snake.speed = this.state.snake.speed - 0.25;
       } else {
         newState.snake.speed = this.state.snake.speed;

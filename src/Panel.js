@@ -29,9 +29,9 @@ class Panel extends React.Component{
                     <p>- ARROW keys / WSAD: direction</p>
                     <p>- [ / ]: decrease / increase speed</p>
                     <p>- SPACE: pause</p>
-                    <p>- R: restart</p>
-                    <p>- ESC: terminate</p>
-                    <p>- Eat pink food to earn more lives</p>
+                    <p>- R: restart the game</p>
+                    <p>- ESC: terminate the game</p>
+                    <p>- Note: Eat pink food to earn more lives</p>
                 </div>
             </div>
         )
